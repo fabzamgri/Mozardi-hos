@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Formulario Banda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .classic-card {
+            background-color: #1e1e1e;
+            border: 1px solid #2d2d2d;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        .form-control {
+            background-color: #2a2a2a;
+            border: 1px solid #3d3d3d;
+            color: #ffffff;
+        }
+        .form-control:focus {
+            background-color: #2a2a2a;
+            border-color: #d4af37;
+            color: #ffffff;
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+        }
+        .form-label {
+            color: #b0b0b0;
+        }
+        .btn-gold {
+            background-color: #d4af37;
+            color: #121212;
+            font-weight: 600;
+            border: none;
+        }
+        .btn-gold:hover {
+            background-color: #b3922e;
+            color: #121212;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5" style="max-width: 600px;">
+    <div class="card classic-card border-0 p-3">
+        <div class="card-body p-4">
+            <h2 class="text-center fw-bold mb-4" th:text="${titulo}" style="color: #d4af37;">Gestión de Banda</h2>
+
+            <form th:action="@{/bandas/guardar}" th:object="${banda}" method="post">
+
+                <!-- Campo oculto para mantener el ID -->
+                <input type="hidden" th:field="*{id}">
+
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre de la Banda</label>
+                    <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required placeholder="Ej: The Beatles">
+                </div>
+
+                <div class="mb-3">
+                    <label for="genero" class="form-label">Género Musical</label>
+                    <input type="text" id="genero" th:field="*{genero}" class="form-control" required placeholder="Ej: Rock / Pop">
+                </div>
+
+                <div class="mb-3">
+                    <label for="ano_fundacion" class="form-label">Año de Fundación</label>
+                    <input type="number" id="ano_fundacion" th:field="*{ano_fundacion}" class="form-control" required placeholder="Ej: 1960">
+                </div>
+
+                <div class="mb-3">
+                    <label for="ventas_millones" class="form-label">Ventas en Millones (Opcional)</label>
+                    <input type="number" step="0.1" id="ventas_millones" th:field="*{ventas_millones}" class="form-control" placeholder="Ej: 600.0">
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="/bandas" class="btn btn-outline-secondary px-4">Cancelar</a>
+                    <button type="submit" class="btn btn-gold px-4">Guardar Banda</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

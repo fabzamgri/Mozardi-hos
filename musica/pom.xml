@@ -73,6 +73,12 @@
 			<artifactId>kotlin-test-junit5</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Dependencia de Kotlin-CSV requerida para la lectura y volcado -->
+		<dependency>
+			<groupId>com.github.doyaaaaaken</groupId>
+			<artifactId>kotlin-csv-jvm</artifactId>
+			<version>1.9.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>

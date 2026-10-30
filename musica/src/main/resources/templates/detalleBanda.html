@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalles de la Banda</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+    }
+    .classic-card {
+      background-color: #1e1e1e;
+      border: 1px solid #2d2d2d;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+<div class="container mt-5" style="max-width: 500px;">
+  <div class="card classic-card text-center p-4">
+    <div class="card-body">
+      <h1 class="fw-bold mb-3" th:text="${banda.nombre}" style="color: #d4af37;">Nombre de la Banda</h1>
+      <hr style="border-color: #2d2d2d;">
+      <p class="text-secondary fs-5 text-start px-4">
+        <strong>ID:</strong> <span class="text-light" th:text="${banda.id}">1</span> <br>
+        <strong>Género:</strong> <span class="text-light" th:text="${banda.genero}">Rock</span> <br>
+        <strong>Año de Fundación:</strong> <span class="text-light" th:text="${banda.ano_fundacion}">1960</span> <br>
+        <strong>Ventas (Millones):</strong> <span class="text-light" th:text="${banda.ventas_millones != null ? banda.ventas_millones : 'N/A'}">600.0</span>
+      </p>
+      <hr style="border-color: #2d2d2d;">
+      <div class="d-flex justify-content-around mt-4">
+        <a href="/bandas" class="btn btn-outline-light px-4">Volver al listado</a>
+        <a th:href="@{/bandas/editar/{id}(id=${banda.id})}" class="btn btn-warning px-4">Editar</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
