@@ -1,3 +1,8 @@
+/**
+ * @author Fabio Zamudio Grimaldo
+ * Entidad: MusicaApplication
+ */
+
 package com.grupo.musica
 
 import org.springframework.boot.autoconfigure.SpringBootApplication

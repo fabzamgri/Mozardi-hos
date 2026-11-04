@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Archivo de Bandas - Clásico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #14100c; /* Fondo caoba muy oscuro / madera */
+            color: #dcd6cd;
+            font-family: 'Georgia', serif; /* Letra con toque más clásico / editorial */
+            min-height: 100vh;
+        }
+        /* Contenedor estilo cuadro con marco elegante */
+        .classic-frame {
+            background-color: #1c1510 !important;
+            border: 2px solid #8c6d36 !important; /* Marco dorado envejecido */
+            border-radius: 6px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 0, 0, 0.5);
+            color: #e0d7c6;
+        }
+        /* Tabla integrada en el ambiente clásico */
+        .table-classical {
+            color: #e0d7c6 !important;
+            background-color: transparent !important;
+        }
+        .table-classical th,
+        .table-classical td {
+            background-color: #1c1510 !important;
+            color: #e0d7c6 !important;
+            border-color: #33261a !important;
+            vertical-align: middle;
+        }
+        .table-classical th {
+            background-color: #4a0e0e !important; /* Rojo ópera / burdeos en la cabecera */
+            color: #f3e5ab !important; /* Dorado claro */
+            border-bottom: 2px solid #c5a059 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        .table-hover tbody tr:hover td {
+            background-color: #2b1f17 !important;
+            color: #ffffff !important;
+        }
+        /* Botones estilo oro y terciopelo */
+        .btn-opera-gold {
+            background: linear-gradient(to bottom, #d4af37, #997a26);
+            color: #14100c;
+            font-weight: bold;
+            border: 1px solid #6b531a;
+        }
+        .btn-opera-gold:hover {
+            background: linear-gradient(to bottom, #e6c280, #b3922e);
+            color: #14100c;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <!-- Cabecera estilo palco / salón -->
+    <div class="d-flex justify-content-between align-items-center mb-4 p-4 classic-frame">
+        <div>
+            <h1 class="fw-bold m-0" style="color: #f39c12; font-family: 'Georgia', serif;">🎻 Real Archivo de Bandas</h1>
+            <p class="text-muted m-0 fst-italic">Catálogo musical de cámara y concierto</p>
+        </div>
+        <a href="/bandas/nueva" class="btn btn-opera-gold px-4 py-2">＋ Registrar Nueva Banda</a>
+    </div>
+
+    <!-- Contenedor principal de la tabla -->
+    <div class="card classic-frame border-0 p-3">
+        <div class="card-body">
+            <table class="table table-classical table-hover align-middle mb-0">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Género</th>
+                    <th>Año Fundación</th>
+                    <th>Ventas (Millones)</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="banda : ${bandas}">
+                    <td th:text="${banda.id}">1</td>
+                    <td>
+                        <a th:href="@{/bandas/{id}(id=${banda.id})}" th:text="${banda.nombre}" class="text-decoration-none fw-bold" style="color: #e6c280;">Nombre</a>
+                    </td>
+                    <td th:text="${banda.genero}">Género</td>
+                    <td th:text="${banda.ano_fundacion}">1960</td>
+                    <td th:text="${banda.ventas_millones != null ? banda.ventas_millones + ' M' : 'Desconocido'}">600.0 M</td>
+                    <td class="text-center">
+                        <a th:href="@{/bandas/{id}(id=${banda.id})}" class="btn btn-sm btn-outline-warning">Ver</a>
+                        <a th:href="@{/bandas/editar/{id}(id=${banda.id})}" class="btn btn-sm btn-outline-secondary text-light">Editar</a>
+                        <a th:href="@{/bandas/borrar/{id}(id=${banda.id})}" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Desea eliminar este registro del archivo?');">Borrar</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(bandas)}">
+                    <td colspan="6" class="text-center text-muted py-4 fst-italic">No constan bandas registradas en el archivo.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
