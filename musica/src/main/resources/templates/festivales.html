@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+  @author Carlos Prada Escortell
+  Entidad: Festival
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Festivales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/festival.css}">
+</head>
+<body>
+
+<header class="cabecera">
+    <div class="contenedor">
+        <a th:href="@{/}" class="logo">Música</a>
+        <nav>
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/festivales}">Festivales</a>
+        </nav>
+    </div>
+</header>
+
+<main class="contenido">
+    <div class="contenedor">
+
+        <div class="titulo-pagina">
+            <h1>Festivales</h1>
+            <a th:href="@{/festivales/nuevo}" class="boton boton-principal">+ Nuevo festival</a>
+        </div>
+
+        <!-- Mensaje tras crear, editar o borrar -->
+        <div th:if="${mensaje}" class="aviso aviso-exito" th:text="${mensaje}"></div>
+
+        <!-- Buscador + filtro por categoría -->
+        <form th:action="@{/festivales}" method="get" class="buscador">
+            <input type="text" name="texto" th:value="${texto}" placeholder="Buscar por nombre o ciudad...">
+            <select name="categoria">
+                <option value="">Todas las categorías</option>
+                <option th:each="c : ${categorias}" th:value="${c}" th:text="${c}"
+                        th:selected="${c == categoriaElegida}"></option>
+            </select>
+            <button type="submit" class="boton boton-principal">Buscar</button>
+            <a th:href="@{/festivales}" class="boton boton-secundario">Limpiar</a>
+        </form>
+
+        <div th:if="${#lists.isEmpty(festivales)}" class="aviso aviso-info">
+            No se ha encontrado ningún festival.
+        </div>
+
+        <div th:unless="${#lists.isEmpty(festivales)}" class="tabla-envoltorio">
+            <table class="tabla">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Ciudad</th>
+                    <th>Categoría</th>
+                    <th>Asistentes</th>
+                    <th>Abono</th>
+                    <th class="acciones">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="f : ${festivales}">
+                    <td th:text="${f.id}"></td>
+                    <td><strong th:text="${f.nombre}"></strong></td>
+                    <td th:text="${f.ciudad}"></td>
+                    <td><span class="etiqueta" th:text="${f.categoria}"></span></td>
+                    <td th:text="${#numbers.formatInteger(f.asistentes, 1, 'POINT')}"></td>
+                    <td th:text="${#numbers.formatDecimal(f.precioAbono, 1, 2, 'COMMA')} + ' €'"></td>
+                    <td class="acciones">
+                        <a th:href="@{/festivales/{id}(id=${f.id})}" class="boton boton-pequeno boton-ver">Ver</a>
+                        <a th:href="@{/festivales/editar/{id}(id=${f.id})}" class="boton boton-pequeno boton-editar">Editar</a>
+                        <a th:href="@{/festivales/borrar/{id}(id=${f.id})}" class="boton boton-pequeno boton-borrar"
+                           onclick="return confirm('¿Seguro que quieres borrar este festival?');">Borrar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</main>
+
+<footer class="pie">Entidad Festival · Carlos Prada Escortell</footer>
+
+</body>
+</html>
