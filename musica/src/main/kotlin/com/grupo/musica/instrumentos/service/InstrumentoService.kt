@@ -1,7 +1,7 @@
-package com.grupo.musica.service
+package com.grupo.musica.instrumentos.service
 
-import com.grupo.musica.model.Instrumento
-import com.grupo.musica.repository.InstrumentoRepository
+import com.grupo.musica.instrumentos.model.Instrumento
+import com.grupo.musica.instrumentos.repository.InstrumentoRepository
 import org.springframework.stereotype.Service
 
 /**

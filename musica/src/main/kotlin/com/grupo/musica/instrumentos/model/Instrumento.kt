@@ -1,4 +1,4 @@
-package com.grupo.musica.model
+package com.grupo.musica.instrumentos.model
 
 /**
  * @author Lucia Troncho Ortí

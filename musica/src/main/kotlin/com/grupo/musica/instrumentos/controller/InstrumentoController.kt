@@ -1,7 +1,7 @@
-package com.grupo.musica.controller
+package com.grupo.musica.instrumentos.controller
 
-import com.grupo.musica.model.Instrumento
-import com.grupo.musica.service.InstrumentoService
+import com.grupo.musica.instrumentos.model.Instrumento
+import com.grupo.musica.instrumentos.service.InstrumentoService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping

@@ -1,8 +1,9 @@
-package com.grupo.musica.repository
+package com.grupo.musica.instrumentos.repository
 
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
-import com.grupo.musica.model.Instrumento
+import com.grupo.musica.instrumentos.model.Instrumento
+import org.springframework.core.io.ClassPathResource
 import org.springframework.stereotype.Repository
 import java.io.File
 import java.nio.file.Files
