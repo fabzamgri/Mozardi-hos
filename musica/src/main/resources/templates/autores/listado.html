@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Autores Clásicos - Listado</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-dark text-light">
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-warning pb-3">
+        <h1 class="text-warning">🎹 Autores Clásicos</h1>
+        <div>
+            <a href="/" class="btn btn-outline-light me-2">Inicio</a>
+            <!-- Botón de reinicio añadido aquí -->
+            <a href="/autores/reset" class="btn btn-outline-warning fw-bold me-2">🔄 Restablecer Datos</a>
+            <a href="/autores/formulario" class="btn btn-warning fw-bold">+ Añadir Autor</a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-dark table-striped table-hover align-middle border-secondary">
+            <thead class="table-warning text-dark">
+            <tr>
+                <th>ID</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Siglo</th>
+                <th>Fecha Nacimiento</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="autor : ${autores}">
+                <td th:text="${autor.id}">1</td>
+                <td>
+                    <img th:src="${#strings.isEmpty(autor.imagen) ? 'https://via.placeholder.com/60?text=No+Img' : autor.imagen}"
+                         alt="Foto Autor"
+                         style="width: 50px; height: 50px; object-fit: cover;"
+                         class="rounded-circle border border-warning" />
+                </td>
+                <td class="fw-bold" th:text="${autor.nombre}">Mozart</td>
+                <td th:text="${autor.siglo}">18</td>
+                <td th:text="${autor.fechaNacimiento}">27/01/1756</td>
+                <td class="text-center">
+                    <a th:href="@{/autores/detalle/{id}(id=${autor.id})}" class="btn btn-sm btn-info me-1">👁 Ver</a>
+                    <a th:href="@{/autores/formulario/{id}(id=${autor.id})}" class="btn btn-sm btn-warning me-1">✏️ Editar</a>
+                    <a th:href="@{/autores/eliminar/{id}(id=${autor.id})}"
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('¿Seguro que deseas borrar este autor?')">🗑️ Borrar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
