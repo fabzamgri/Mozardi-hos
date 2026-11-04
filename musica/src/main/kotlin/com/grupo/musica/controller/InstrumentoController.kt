@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping
 
 @Controller
 class InstrumentoController(private val instrumentoService: InstrumentoService) {
+
     // 1. Listar instrumentos
     @GetMapping("/instrumentos")
     fun listarInstrumentos(model: Model): String {
@@ -29,17 +30,15 @@ class InstrumentoController(private val instrumentoService: InstrumentoService) 
     }
 
     // 2. Ver detalle de un instrumento
-    @GetMapping("/instrumentos/{id_instrumento}")
+    // La expresión regular \\d+ evita que "nuevo" se confunda con un id
+    @GetMapping("/instrumentos/{id_instrumento:\\d+}")
     fun verInstrumento(
         @PathVariable("id_instrumento") id: Int,
         model: Model
     ): String {
 
         val instrumento = instrumentoService.buscar(id)
-
-        if (instrumento == null) {
-            return "errorInstrumentos"
-        }
+            ?: return "errorInstrumentos"
 
         model.addAttribute("instrumento", instrumento)
 
@@ -50,8 +49,7 @@ class InstrumentoController(private val instrumentoService: InstrumentoService) 
     @GetMapping("/instrumentos/nuevo")
     fun nuevoInstrumento(model: Model): String {
 
-        val instrumentoVacio = Instrumento(0, "", "", 0, 0.0, ""
-        )
+        val instrumentoVacio = Instrumento(0, "", "", 0, 0.0, "")
 
         model.addAttribute("instrumento", instrumentoVacio)
         model.addAttribute("titulo", "Nuevo instrumento")
@@ -60,17 +58,14 @@ class InstrumentoController(private val instrumentoService: InstrumentoService) 
     }
 
     // 4. Editar un instrumento
-    @GetMapping("/instrumentos/editar/{id_instrumento}")
+    @GetMapping("/instrumentos/editar/{id_instrumento:\\d+}")
     fun editarInstrumento(
         @PathVariable("id_instrumento") id: Int,
         model: Model
     ): String {
 
         val instrumento = instrumentoService.buscar(id)
-
-        if (instrumento == null) {
-            return "errorInstrumentos"
-        }
+            ?: return "errorInstrumentos"
 
         model.addAttribute("instrumento", instrumento)
         model.addAttribute("titulo", "Editar instrumento")
@@ -90,7 +85,7 @@ class InstrumentoController(private val instrumentoService: InstrumentoService) 
     }
 
     // 6. Borrar instrumento
-    @PostMapping("/instrumentos/eliminar/{id_instrumento}")
+    @PostMapping("/instrumentos/eliminar/{id_instrumento:\\d+}")
     fun borrarInstrumento(
         @PathVariable("id_instrumento") id: Int
     ): String {
