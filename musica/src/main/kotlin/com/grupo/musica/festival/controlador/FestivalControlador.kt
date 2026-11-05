@@ -15,7 +15,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 @Controller
 class FestivalControlador(private val festivalServicio: FestivalServicio) {
 
-    // 1. LISTAR (con buscador y filtro por categoría)
+    @GetMapping("/")
+    fun inicio(): String {
+        return "index"
+    }
+
     @GetMapping("/festivales")
     fun listarFestivales(
         @RequestParam("texto", required = false) texto: String?,
@@ -30,7 +34,6 @@ class FestivalControlador(private val festivalServicio: FestivalServicio) {
         return "festivales"
     }
 
-    // 2. FORMULARIO NUEVO FESTIVAL (objeto vacío con ID 0)
     @GetMapping("/festivales/nuevo")
     fun nuevoFestival(model: Model): String {
         model.addAttribute("festival", Festival())
@@ -38,8 +41,7 @@ class FestivalControlador(private val festivalServicio: FestivalServicio) {
         return "formFestival"
     }
 
-    // 3. DETALLE
-    // El id llega como String para que si alguien escribe /festivales/abc no pete el programa
+
     @GetMapping("/festivales/{id}")
     fun verFestival(@PathVariable("id") id: String, model: Model): String {
         val festival = id.toIntOrNull()?.let { festivalServicio.buscar(it) }
@@ -48,7 +50,6 @@ class FestivalControlador(private val festivalServicio: FestivalServicio) {
         return "detalleFestival"
     }
 
-    // 4. FORMULARIO EDITAR FESTIVAL
     @GetMapping("/festivales/editar/{id}")
     fun editarFestival(@PathVariable("id") id: String, model: Model): String {
         val festival = id.toIntOrNull()?.let { festivalServicio.buscar(it) }
@@ -58,7 +59,6 @@ class FestivalControlador(private val festivalServicio: FestivalServicio) {
         return "formFestival"
     }
 
-    // 5. GUARDAR (sirve para crear y para editar)
     @PostMapping("/festivales/guardar")
     fun guardarFestival(
         @ModelAttribute("festival") festival: Festival,
@@ -69,14 +69,12 @@ class FestivalControlador(private val festivalServicio: FestivalServicio) {
         val esNuevo = festival.id == 0
         val titulo = if (esNuevo) "Nuevo Festival" else "Editar Festival"
 
-        // Errores de tipo (por ejemplo texto en un campo numérico)
         if (resultado.hasErrors()) {
             prepararFormulario(model, titulo)
             model.addAttribute("error", "Revisa los datos: asistentes y precio deben ser números.")
             return "formFestival"
         }
 
-        // Errores de contenido (vacíos, negativos, categoría...)
         val error = festivalServicio.validar(festival)
         if (error != null) {
             prepararFormulario(model, titulo)
@@ -84,7 +82,6 @@ class FestivalControlador(private val festivalServicio: FestivalServicio) {
             return "formFestival"
         }
 
-        // Si es una edición, comprobamos que el festival siga existiendo
         if (!esNuevo && festivalServicio.buscar(festival.id) == null) {
             return mostrarError(festival.id.toString(), model)
         }
@@ -98,7 +95,6 @@ class FestivalControlador(private val festivalServicio: FestivalServicio) {
         return "redirect:/festivales"
     }
 
-    // 6. BORRAR (la confirmación se hace con confirm() en la plantilla)
     @GetMapping("/festivales/borrar/{id}")
     fun borrarFestival(@PathVariable("id") id: String, model: Model, redirect: RedirectAttributes): String {
         val idNumero = id.toIntOrNull() ?: return mostrarError(id, model)
@@ -109,13 +105,11 @@ class FestivalControlador(private val festivalServicio: FestivalServicio) {
         return "redirect:/festivales"
     }
 
-    // Datos que necesita siempre el formulario
     private fun prepararFormulario(model: Model, titulo: String) {
         model.addAttribute("titulo", titulo)
         model.addAttribute("categorias", festivalServicio.categorias)
     }
 
-    // Página de error de registro no encontrado
     private fun mostrarError(id: String, model: Model): String {
         model.addAttribute("idBuscado", id)
         return "errorFestival"
