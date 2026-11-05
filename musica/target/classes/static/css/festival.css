@@ -1,0 +1,388 @@
+/**
+ * @author Carlos Prada Escortell
+ * Entidad: Festival
+ */
+
+/* ---------- Paleta y tipografías ---------- */
+:root {
+    --bittersweet: #ff6e61;
+    --golden: #ffcb5c;
+    --vista: #88d8b0;
+    --emerald: #4abf8a;
+    --persimmon: #ff575c;
+
+    --fondo: #fff8ef;
+    --texto: #2b2230;
+    --texto-suave: #6b6070;
+    --blanco: #ffffff;
+
+    --fuente-titulos: "Bebas Neue", Impact, sans-serif;
+    --fuente-texto: "Poppins", Arial, sans-serif;
+
+    --radio: 14px;
+    --sombra: 0 6px 18px rgba(43, 34, 48, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: var(--fuente-texto);
+    line-height: 1.5;
+}
+
+h1, h2, h3 {
+    font-family: var(--fuente-titulos);
+    letter-spacing: 1px;
+    font-weight: normal;
+    margin: 0 0 12px;
+}
+
+a { color: inherit; }
+
+/* ---------- Cabecera ---------- */
+.cabecera {
+    background: linear-gradient(120deg, var(--bittersweet), var(--golden));
+    color: var(--blanco);
+    padding: 22px 0;
+    box-shadow: var(--sombra);
+}
+
+.cabecera .contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.cabecera .logo {
+    font-family: var(--fuente-titulos);
+    font-size: 2rem;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.cabecera nav a {
+    text-decoration: none;
+    margin-left: 18px;
+    font-weight: 600;
+}
+
+.cabecera nav a:hover { text-decoration: underline; }
+
+/* ---------- Estructura ---------- */
+.contenedor {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.contenido { padding: 36px 0 60px; }
+
+.contenido.estrecho .contenedor { max-width: 720px; }
+
+.titulo-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.titulo-pagina h1 { font-size: 2.6rem; margin: 0; }
+
+.pie {
+    text-align: center;
+    color: var(--texto-suave);
+    font-size: 0.85rem;
+    padding: 20px 0 30px;
+}
+
+/* ---------- Botones ---------- */
+.boton {
+    display: inline-block;
+    border: none;
+    border-radius: 999px;
+    padding: 9px 20px;
+    font-family: var(--fuente-texto);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.boton:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra);
+}
+
+.boton-principal { background: var(--bittersweet); color: var(--blanco); }
+.boton-guardar   { background: var(--emerald);     color: var(--blanco); }
+.boton-secundario { background: var(--blanco); color: var(--texto); border: 2px solid var(--texto); }
+
+.boton-pequeno { padding: 5px 13px; font-size: 0.82rem; }
+.boton-ver     { background: var(--vista);     color: var(--texto); }
+.boton-editar  { background: var(--golden);    color: var(--texto); }
+.boton-borrar  { background: var(--persimmon); color: var(--blanco); }
+
+/* ---------- Avisos ---------- */
+.aviso {
+    padding: 14px 18px;
+    border-radius: var(--radio);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.aviso-exito { background: var(--vista); border-left: 6px solid var(--emerald); }
+.aviso-error { background: #ffe1df;      border-left: 6px solid var(--persimmon); }
+.aviso-info  { background: #fff1d1;      border-left: 6px solid var(--golden); }
+
+/* ---------- Buscador ---------- */
+.buscador {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: var(--blanco);
+    padding: 16px;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    margin-bottom: 24px;
+}
+
+.buscador input,
+.buscador select { flex: 1 1 200px; }
+
+/* ---------- Tabla ---------- */
+.tabla-envoltorio {
+    overflow-x: auto;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--blanco);
+    min-width: 720px;
+}
+
+.tabla th {
+    background: var(--texto);
+    color: var(--golden);
+    font-family: var(--fuente-titulos);
+    font-size: 1.15rem;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-align: left;
+    padding: 12px 14px;
+}
+
+.tabla td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f1e6da;
+}
+
+.tabla tbody tr:hover { background: #fff3e6; }
+
+.tabla .acciones {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.etiqueta {
+    display: inline-block;
+    background: var(--vista);
+    color: var(--texto);
+    padding: 2px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ---------- Formulario ---------- */
+.tarjeta {
+    background: var(--blanco);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 28px;
+}
+
+.campo { margin-bottom: 18px; }
+
+.campo label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.campo small {
+    color: var(--texto-suave);
+    font-size: 0.8rem;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #eadbcc;
+    border-radius: 10px;
+    font-family: var(--fuente-texto);
+    font-size: 0.95rem;
+    background: var(--blanco);
+    color: var(--texto);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--bittersweet);
+}
+
+textarea { resize: vertical; min-height: 110px; }
+
+.fila-dos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.botonera {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* ---------- Detalle ---------- */
+.detalle {
+    background: var(--blanco);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    overflow: hidden;
+}
+
+.detalle-foto {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    background: var(--golden);
+}
+
+.sin-foto {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(120deg, var(--vista), var(--emerald));
+    color: var(--blanco);
+    font-family: var(--fuente-titulos);
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+}
+
+.detalle-cuerpo { padding: 26px 28px; }
+
+.detalle-cuerpo h1 { font-size: 2.6rem; margin-bottom: 6px; }
+
+.detalle-descripcion {
+    color: var(--texto-suave);
+    margin: 14px 0 22px;
+}
+
+.datos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.dato {
+    background: var(--fondo);
+    border-radius: 10px;
+    padding: 12px 14px;
+    border-top: 4px solid var(--bittersweet);
+}
+
+.dato:nth-child(2) { border-top-color: var(--golden); }
+.dato:nth-child(3) { border-top-color: var(--emerald); }
+.dato:nth-child(4) { border-top-color: var(--vista); }
+
+.dato span {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+}
+
+.dato strong { font-size: 1.1rem; }
+
+/* ---------- Error ---------- */
+.error-caja {
+    text-align: center;
+    padding: 40px 28px;
+}
+
+.error-caja .codigo {
+    font-family: var(--fuente-titulos);
+    font-size: 6rem;
+    color: var(--persimmon);
+    line-height: 1;
+}
+
+/* ---------- Index temporal ---------- */
+.portada {
+    text-align: center;
+    padding: 50px 0 30px;
+}
+
+.portada h1 { font-size: 3.4rem; }
+
+.portada p {
+    max-width: 640px;
+    margin: 0 auto;
+    color: var(--texto-suave);
+}
+
+.tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+    margin-top: 30px;
+}
+
+.tarjeta-entidad {
+    display: block;
+    text-decoration: none;
+    background: var(--blanco);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 26px;
+    border-top: 8px solid var(--bittersweet);
+    transition: transform 0.15s;
+}
+
+.tarjeta-entidad:hover { transform: translateY(-4px); }
+
+.tarjeta-entidad h2 { font-size: 2rem; margin-bottom: 4px; }
+
+.tarjeta-entidad .autor {
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+}
+
+/* ---------- Móvil ---------- */
+@media (max-width: 600px) {
+    .fila-dos { grid-template-columns: 1fr; }
+    .titulo-pagina h1, .portada h1 { font-size: 2.2rem; }
+    .cabecera nav a { margin-left: 0; margin-right: 14px; }
+}

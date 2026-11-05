@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--
+  @author Lucas Palermo Andreu
+  Entidad: Autores Clásicos
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Autores clásicos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/autores.css}">
+</head>
+<body>
+
+<header class="cabecera">
+    <div class="contenedor">
+        <a th:href="@{/}" class="logo">Música</a>
+        <nav>
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/autoresclasicos}">Autores clásicos</a>
+        </nav>
+    </div>
+</header>
+
+<main class="contenido">
+    <div class="contenedor">
+
+        <div class="titulo-pagina">
+            <div>
+                <h1>Autores clásicos</h1>
+                <p class="subtitulo">Compositores de la música clásica a lo largo de la historia</p>
+            </div>
+            <a th:href="@{/autoresclasicos/nuevo}" class="boton boton-principal">+ Nuevo autor</a>
+        </div>
+
+        <!-- Mensaje tras crear, editar, borrar o restaurar -->
+        <div th:if="${mensaje}" class="aviso aviso-exito" th:text="${mensaje}"></div>
+
+        <!-- Buscador + filtro por siglo -->
+        <form th:action="@{/autoresclasicos}" method="get" class="buscador">
+            <input type="text" name="texto" th:value="${texto}" placeholder="Buscar por nombre u obra...">
+            <select name="siglo">
+                <option value="">Todos los siglos</option>
+                <option th:each="s : ${siglos}" th:value="${s}" th:text="'Siglo ' + ${s}"
+                        th:selected="${s == sigloElegido}"></option>
+            </select>
+            <button type="submit" class="boton boton-principal">Buscar</button>
+            <a th:href="@{/autoresclasicos}" class="boton">Limpiar</a>
+        </form>
+
+        <div th:if="${#lists.isEmpty(autores)}" class="aviso aviso-info">
+            No se ha encontrado ningún autor.
+        </div>
+
+        <div th:unless="${#lists.isEmpty(autores)}" class="tabla-envoltorio">
+            <table class="tabla">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Siglo</th>
+                    <th>Nacimiento</th>
+                    <th class="acciones">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a : ${autores}">
+                    <td th:text="${a.id}"></td>
+                    <td class="nombre-autor" th:text="${a.nombre}"></td>
+                    <td><span class="siglo" th:text="'Siglo ' + ${a.siglo}"></span></td>
+                    <td th:text="${a.fechaNacimiento}"></td>
+                    <td class="acciones">
+                        <a th:href="@{/autoresclasicos/{id}(id=${a.id})}" class="boton boton-pequeno boton-ver">Ver</a>
+                        <a th:href="@{/autoresclasicos/editar/{id}(id=${a.id})}" class="boton boton-pequeno boton-editar">Editar</a>
+                        <a th:href="@{/autoresclasicos/borrar/{id}(id=${a.id})}" class="boton boton-pequeno boton-borrar"
+                           onclick="return confirm('¿Seguro que quieres borrar este autor?');">Borrar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Restaurar los autores iniciales (función resetear() de Lucas) -->
+        <p style="margin-top: 22px;">
+            <a th:href="@{/autoresclasicos/resetear}" class="boton boton-pequeno"
+               onclick="return confirm('Se perderán los cambios y se restaurarán los autores iniciales. ¿Continuar?');">Restaurar datos iniciales</a>
+        </p>
+
+    </div>
+</main>
+
+<footer class="pie">Entidad Autores clásicos · Lucas Palermo Andreu</footer>
+
+</body>
+</html>

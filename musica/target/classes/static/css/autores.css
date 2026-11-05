@@ -1,0 +1,398 @@
+/**
+ * @author Lucas Palermo Andreu
+ * Entidad: Autores clásicos
+ * Estilo clásico: tipografía serif, papel de partitura y tinta, con la paleta común del proyecto
+ */
+
+/* ---------- Paleta y tipografías ---------- */
+:root {
+    --bittersweet: #ff6e61;
+    --golden: #ffcb5c;
+    --vista: #88d8b0;
+    --emerald: #4abf8a;
+    --persimmon: #ff575c;
+
+    --papel: #fbf7ee;
+    --papel-oscuro: #f1eadb;
+    --tinta: #1f1a24;
+    --tinta-suave: #5f5866;
+    --linea: #d9cfbd;
+    --blanco: #ffffff;
+
+    --fuente-titulos: "Playfair Display", Georgia, serif;
+    --fuente-texto: "Lora", Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--papel);
+    color: var(--tinta);
+    font-family: var(--fuente-texto);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: var(--fuente-titulos);
+    font-weight: 700;
+    margin: 0 0 10px;
+}
+
+a { color: inherit; }
+
+/* ---------- Cabecera ---------- */
+.cabecera {
+    background: var(--tinta);
+    color: var(--papel);
+    border-bottom: 4px solid var(--emerald);
+}
+
+.cabecera .contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.logo {
+    font-family: var(--fuente-titulos);
+    font-style: italic;
+    font-size: 1.8rem;
+    text-decoration: none;
+}
+
+.cabecera nav a {
+    text-decoration: none;
+    margin-left: 22px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.cabecera nav a:hover { color: var(--golden); }
+
+/* ---------- Estructura ---------- */
+.contenedor {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.contenido {
+    flex: 1;
+    padding: 40px 0 60px;
+}
+
+.contenido.estrecho .contenedor { max-width: 760px; }
+
+/* Título con doble línea, como el pentagrama de una partitura */
+.titulo-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding-bottom: 14px;
+    margin-bottom: 26px;
+    border-bottom: 3px double var(--tinta);
+}
+
+.titulo-pagina h1 {
+    font-size: 2.6rem;
+    margin: 0;
+}
+
+.titulo-pagina .subtitulo {
+    margin: 0;
+    font-style: italic;
+    color: var(--tinta-suave);
+}
+
+.pie {
+    text-align: center;
+    font-style: italic;
+    color: var(--tinta-suave);
+    font-size: 0.85rem;
+    padding: 20px 0 30px;
+    border-top: 1px solid var(--linea);
+}
+
+/* ---------- Botones ---------- */
+.boton {
+    display: inline-block;
+    padding: 9px 20px;
+    border: 2px solid var(--tinta);
+    border-radius: 3px;
+    background: transparent;
+    color: var(--tinta);
+    font-family: var(--fuente-texto);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.boton:hover { background: var(--tinta); color: var(--papel); }
+
+.boton-principal { background: var(--emerald); border-color: var(--emerald); color: var(--blanco); }
+.boton-principal:hover { background: var(--tinta); border-color: var(--tinta); }
+
+.boton-pequeno { padding: 4px 11px; font-size: 0.72rem; }
+.boton-ver    { border-color: var(--emerald); }
+.boton-editar { border-color: var(--golden); }
+.boton-borrar { border-color: var(--bittersweet); color: var(--bittersweet); }
+.boton-borrar:hover { background: var(--bittersweet); color: var(--blanco); }
+
+/* ---------- Avisos ---------- */
+.aviso {
+    padding: 12px 16px;
+    margin-bottom: 22px;
+    border: 1px solid var(--linea);
+    border-left-width: 6px;
+    background: var(--blanco);
+    font-style: italic;
+}
+
+.aviso-exito { border-left-color: var(--emerald); }
+.aviso-error { border-left-color: var(--persimmon); }
+.aviso-info  { border-left-color: var(--golden); }
+
+/* ---------- Buscador ---------- */
+.buscador {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 16px;
+    margin-bottom: 26px;
+    background: var(--papel-oscuro);
+    border: 1px solid var(--linea);
+}
+
+.buscador input,
+.buscador select { flex: 1 1 200px; }
+
+/* ---------- Tabla ---------- */
+.tabla-envoltorio {
+    overflow-x: auto;
+    border: 1px solid var(--tinta);
+    background: var(--blanco);
+}
+
+.tabla {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+}
+
+.tabla th {
+    padding: 12px 14px;
+    text-align: left;
+    font-family: var(--fuente-titulos);
+    font-size: 0.95rem;
+    border-bottom: 3px double var(--tinta);
+    background: var(--papel-oscuro);
+}
+
+.tabla td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--linea);
+}
+
+.tabla tbody tr:hover { background: var(--papel); }
+
+.tabla .acciones {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.tabla .nombre-autor {
+    font-family: var(--fuente-titulos);
+    font-weight: 700;
+}
+
+.siglo {
+    display: inline-block;
+    padding: 1px 10px;
+    border: 1px solid var(--emerald);
+    border-radius: 2px;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--tinta);
+    background: rgba(136, 216, 176, 0.25);
+}
+
+/* ---------- Formulario ---------- */
+.ficha {
+    background: var(--blanco);
+    border: 1px solid var(--tinta);
+    padding: 30px;
+    box-shadow: 6px 6px 0 var(--papel-oscuro);
+}
+
+.campo { margin-bottom: 18px; }
+
+.campo label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.campo small {
+    color: var(--tinta-suave);
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 9px 4px;
+    border: none;
+    border-bottom: 2px solid var(--linea);
+    background: transparent;
+    color: var(--tinta);
+    font-family: var(--fuente-texto);
+    font-size: 1rem;
+}
+
+.buscador input,
+.buscador select {
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    padding: 9px 12px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-bottom-color: var(--emerald);
+}
+
+textarea { resize: vertical; min-height: 110px; }
+
+.fila-dos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.botonera {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+/* ---------- Detalle ---------- */
+.detalle {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    background: var(--blanco);
+    border: 1px solid var(--tinta);
+    box-shadow: 6px 6px 0 var(--papel-oscuro);
+}
+
+.retrato {
+    border-right: 1px solid var(--tinta);
+    background: var(--papel-oscuro);
+    min-height: 300px;
+}
+
+.retrato img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Si no hay foto: la inicial del autor, como una letra capitular */
+.inicial {
+    height: 100%;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--fuente-titulos);
+    font-style: italic;
+    font-size: 7rem;
+    color: var(--emerald);
+}
+
+.detalle-cuerpo { padding: 28px 30px; }
+
+.detalle-cuerpo h1 { font-size: 2.3rem; margin-bottom: 4px; }
+
+.fechas {
+    margin: 0 0 14px;
+    font-style: italic;
+    color: var(--tinta-suave);
+}
+
+.detalle-descripcion { margin: 16px 0 22px; }
+
+.datos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0;
+    margin-bottom: 24px;
+    border-top: 1px solid var(--linea);
+}
+
+.dato {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--linea);
+}
+
+.dato span {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--tinta-suave);
+}
+
+.dato strong {
+    font-family: var(--fuente-titulos);
+    font-size: 1.1rem;
+}
+
+/* ---------- Error ---------- */
+.error-caja {
+    text-align: center;
+    padding: 50px 30px;
+}
+
+.error-caja .clave {
+    font-family: var(--fuente-titulos);
+    font-size: 5.5rem;
+    line-height: 1;
+    color: var(--persimmon);
+    margin-bottom: 10px;
+}
+
+/* ---------- Móvil ---------- */
+@media (max-width: 700px) {
+    .fila-dos { grid-template-columns: 1fr; }
+    .detalle { grid-template-columns: 1fr; }
+    .retrato { border-right: none; border-bottom: 1px solid var(--tinta); min-height: 200px; }
+    .inicial { min-height: 200px; font-size: 5rem; }
+    .titulo-pagina h1 { font-size: 2rem; }
+    .cabecera nav a { margin-left: 0; margin-right: 16px; }
+}

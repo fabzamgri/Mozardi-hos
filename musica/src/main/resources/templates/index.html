@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--
+  @author Carlos Prada Escortell
+  Página principal del proyecto
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Música</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bittersweet: #ff6e61;
+            --golden: #ffcb5c;
+            --vista: #88d8b0;
+            --emerald: #4abf8a;
+            --persimmon: #ff575c;
+            --fondo: #fff8ef;
+            --texto: #2b2230;
+            --texto-suave: #6b6070;
+            --blanco: #ffffff;
+            --sombra: 0 8px 22px rgba(43, 34, 48, 0.14);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--fondo);
+            color: var(--texto);
+            font-family: "Poppins", Arial, sans-serif;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .cabecera {
+            background: linear-gradient(120deg, var(--bittersweet), var(--golden));
+            padding: 22px 0;
+            box-shadow: var(--sombra);
+        }
+
+        .logo {
+            font-family: "Bebas Neue", Impact, sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: var(--blanco);
+            text-decoration: none;
+        }
+
+        .contenido {
+            flex: 1;
+            padding: 50px 0 60px;
+        }
+
+        .portada {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .portada h1 {
+            font-family: "Bebas Neue", Impact, sans-serif;
+            font-weight: normal;
+            font-size: 4.5rem;
+            letter-spacing: 3px;
+            margin: 0 0 10px;
+        }
+
+        .portada p {
+            max-width: 560px;
+            margin: 0 auto;
+            color: var(--texto-suave);
+        }
+
+        /* Cuatro botones en cuadrícula 2x2 */
+        .secciones {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .seccion {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 160px;
+            border-radius: 18px;
+            box-shadow: var(--sombra);
+            font-family: "Bebas Neue", Impact, sans-serif;
+            font-size: 2.6rem;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .seccion:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 28px rgba(43, 34, 48, 0.2);
+        }
+
+        .seccion-festivales   { background: var(--bittersweet); color: var(--blanco); }
+        .seccion-bandas       { background: var(--golden);      color: var(--texto); }
+        .seccion-instrumentos { background: var(--vista);       color: var(--texto); }
+        .seccion-autores      { background: var(--emerald);     color: var(--blanco); }
+
+        .pie {
+            text-align: center;
+            color: var(--texto-suave);
+            font-size: 0.85rem;
+            padding: 20px 0 30px;
+        }
+
+        @media (max-width: 600px) {
+            .secciones { grid-template-columns: 1fr; }
+            .seccion { min-height: 110px; font-size: 2.1rem; }
+            .portada h1 { font-size: 3.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="cabecera">
+    <div class="contenedor">
+        <a th:href="@{/}" class="logo">Música</a>
+    </div>
+</header>
+
+<main class="contenido">
+    <div class="contenedor">
+
+        <section class="portada">
+            <h1>Música</h1>
+            <p>Elige una sección para consultar, añadir, modificar o eliminar sus registros.</p>
+        </section>
+
+        <nav class="secciones">
+            <a th:href="@{/festivales}" class="seccion seccion-festivales">Festivales</a>
+            <a th:href="@{/bandas}" class="seccion seccion-bandas">Bandas</a>
+            <a th:href="@{/instrumentos}" class="seccion seccion-instrumentos">Instrumentos</a>
+            <a th:href="@{/autoresclasicos}" class="seccion seccion-autores">Autores clásicos</a>
+        </nav>
+
+    </div>
+</main>
+
+<footer class="pie">Proyecto Música</footer>
+
+</body>
+</html>
