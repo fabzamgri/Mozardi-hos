@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+  @author Lucas Palermo Andreu
+  Entidad: Autores Clásicos
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titulo}">Formulario autor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/autores.css}">
+</head>
+<body>
+
+<header class="cabecera">
+    <div class="contenedor">
+        <a th:href="@{/}" class="logo">Música</a>
+        <nav>
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/autoresclasicos}">Autores clásicos</a>
+        </nav>
+    </div>
+</header>
+
+<main class="contenido estrecho">
+    <div class="contenedor">
+
+        <div class="titulo-pagina">
+            <h1 th:text="${titulo}">Formulario</h1>
+        </div>
+
+        <!-- Error de validación -->
+        <div th:if="${error}" class="aviso aviso-error" th:text="${error}"></div>
+
+        <form th:action="@{/autoresclasicos/guardar}" th:object="${autor}" method="post" class="ficha">
+
+            <!-- El ID va oculto: 0 = nuevo, otro valor = edición -->
+            <input type="hidden" th:field="*{id}">
+
+            <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" th:field="*{nombre}" required>
+            </div>
+
+            <div class="fila-dos">
+                <div class="campo">
+                    <label for="siglo">Siglo</label>
+                    <input type="text" id="siglo" th:field="*{siglo}" placeholder="18 o 18-19" required>
+                </div>
+                <div class="campo">
+                    <label for="fechaNacimiento">Fecha de nacimiento</label>
+                    <input type="text" id="fechaNacimiento" th:field="*{fechaNacimiento}" placeholder="27 de enero de 1756" required>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="obrasDestacadas">Obras destacadas</label>
+                <textarea id="obrasDestacadas" th:field="*{obrasDestacadas}" required></textarea>
+            </div>
+
+            <div class="campo">
+                <label for="imagen">Imagen</label>
+                <input type="text" id="imagen" th:field="*{imagen}" placeholder="https://... o mozart.jpg">
+                <small>Una URL de internet o el nombre de un archivo de static/img/autores/ (opcional)</small>
+            </div>
+
+            <div class="botonera">
+                <a th:href="@{/autoresclasicos}" class="boton">Cancelar</a>
+                <button type="submit" class="boton boton-principal">Guardar</button>
+            </div>
+        </form>
+
+    </div>
+</main>
+
+<footer class="pie">Entidad Autores clásicos · Lucas Palermo Andreu</footer>
+
+</body>
+</html>

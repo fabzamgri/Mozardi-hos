@@ -54,10 +54,4 @@ class BandasControlador(private val bandasServicio: BandasServicio) {
         bandasServicio.borrar(id)
         return "redirect:/bandas"
     }
-
-    // Redirige la raíz al listado de bandas para evitar el error 404 inicial
-    @GetMapping("/")
-    fun inicio(): String {
-        return "redirect:/bandas"
-    }
 }

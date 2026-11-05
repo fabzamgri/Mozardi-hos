@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--
+  @author Carlos Prada Escortell
+  Entidad: Festival
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titulo}">Formulario festival</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/festival.css}">
+</head>
+<body>
+
+<header class="cabecera">
+    <div class="contenedor">
+        <a th:href="@{/}" class="logo">Música</a>
+        <nav>
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/festivales}">Festivales</a>
+        </nav>
+    </div>
+</header>
+
+<main class="contenido estrecho">
+    <div class="contenedor">
+
+        <div class="titulo-pagina">
+            <h1 th:text="${titulo}">Formulario</h1>
+        </div>
+
+        <!-- Error de validación -->
+        <div th:if="${error}" class="aviso aviso-error" th:text="${error}"></div>
+
+        <form th:action="@{/festivales/guardar}" th:object="${festival}" method="post" class="tarjeta">
+
+            <!-- El ID va oculto: 0 = nuevo, otro valor = edición -->
+            <input type="hidden" th:field="*{id}">
+
+            <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" th:field="*{nombre}" required>
+            </div>
+
+            <div class="fila-dos">
+                <div class="campo">
+                    <label for="ciudad">Ciudad</label>
+                    <input type="text" id="ciudad" th:field="*{ciudad}" required>
+                </div>
+                <div class="campo">
+                    <label for="categoria">Categoría</label>
+                    <select id="categoria" th:field="*{categoria}" required>
+                        <option value="">-- Elige una categoría --</option>
+                        <option th:each="c : ${categorias}" th:value="${c}" th:text="${c}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="fila-dos">
+                <div class="campo">
+                    <label for="asistentes">Asistentes</label>
+                    <input type="number" id="asistentes" th:field="*{asistentes}" min="0" required>
+                </div>
+                <div class="campo">
+                    <label for="precioAbono">Precio del abono (€)</label>
+                    <input type="number" id="precioAbono" th:field="*{precioAbono}" min="0" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" th:field="*{descripcion}" required></textarea>
+            </div>
+
+            <div class="campo">
+                <label for="foto">Foto</label>
+                <input type="text" id="foto" th:field="*{foto}" placeholder="arenal.jpg">
+                <small>Nombre del archivo guardado en static/img/festivales/</small>
+            </div>
+
+            <div class="botonera">
+                <a th:href="@{/festivales}" class="boton boton-secundario">Cancelar</a>
+                <button type="submit" class="boton boton-guardar">Guardar</button>
+            </div>
+        </form>
+
+    </div>
+</main>
+
+<footer class="pie">Entidad Festival · Carlos Prada Escortell</footer>
+
+</body>
+</html>

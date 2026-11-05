@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!--
   @author Carlos Prada Escortell
-  Página principal TEMPORAL (solo para probar la entidad Festival)
+  Entidad: Festival
 -->
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Música</title>
+    <title>Festival no encontrado</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/festival.css}">
 </head>
@@ -17,28 +17,29 @@
     <div class="contenedor">
         <a th:href="@{/}" class="logo">Música</a>
         <nav>
+            <a th:href="@{/}">Inicio</a>
             <a th:href="@{/festivales}">Festivales</a>
         </nav>
     </div>
 </header>
 
-<main class="contenido">
+<main class="contenido estrecho">
     <div class="contenedor">
 
-        <section class="portada">
-            <h1>Música</h1>
-            <p>Registros de festivales, bandas, instrumentos y autores clásicos.</p>
-        </section>
-
-        <div class="tarjetas">
-            <a th:href="@{/festivales}" class="tarjeta-entidad">
-                <h2>Festivales</h2>
-                <p class="autor">Carlos Prada Escortell</p>
-            </a>
+        <div class="tarjeta error-caja">
+            <div class="codigo">404</div>
+            <h1>Festival no encontrado</h1>
+            <p>
+                No existe ningún festival con el ID
+                <strong th:text="${idBuscado}">?</strong>.
+            </p>
+            <a th:href="@{/festivales}" class="boton boton-principal">Volver al listado</a>
         </div>
 
     </div>
 </main>
 
+<footer class="pie">Entidad Festival · Carlos Prada Escortell</footer>
+
 </body>
-</html>>
+</html>
